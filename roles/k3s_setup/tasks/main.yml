@@ -1,0 +1,17 @@
+---
+- name: Check if k3s is already active
+  command: k3s kubectl get node
+  register: active
+  ignore_errors: true
+
+- name: Install k3s via public available script
+  command: curl -sfL https://get.k3s.io | K3S_KUBECONFIG_MODE="644" sh -s -
+  when: active.rc != 0
+
+- name: Check to make sure that control-plane/master is running
+  command: k3s kubectl get node
+  retries: 5
+  delay: 10
+  register: result
+  until: result.rc == 0
+  when: active.rc != 0

@@ -1,0 +1,4 @@
+---
+- name: Print manifest
+  debug: "{{ services_manifest }}"
+  

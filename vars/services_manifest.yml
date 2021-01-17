@@ -1,0 +1,4 @@
+---
+services_manifest:
+  - image: hello-world:latest
+    path: services/hello-world

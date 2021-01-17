@@ -1,0 +1,9 @@
+---
+- name: Deploy k3s and ensure it is running
+  hosts: 127.0.0.1
+  connection: local
+  vars_file:
+    - "./vars/service_manifest.yml"
+  roles:
+    - k3s_setup
+    - services_setup
